@@ -4,18 +4,41 @@
   <title>Wello Global AI Recruitment Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   <h1>Wello Global AI Recruitment Assistant</h1>
-  <p>Click the button below to start the voice demo.</p>
+  <p>Click below to start the AI voice demo.</p>
 
   <button id="start">Start Voice Demo</button>
+  <button id="stop">End Call</button>
 
   <script>
     const assistantId = "d85c6c22-89ad-4ab8-b770-babb76a5f3c8";
 
-    document.getElementById("start").onclick = function () {
-      alert("Vapi voice demo will be connected here.");
+    // IMPORTANT:
+    // Paste your Vapi PUBLIC key here, not your private key.
+    const publicKey = "YOUR_PUBLIC_KEY_HERE";
+
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
+    script.defer = true;
+    script.async = true;
+
+    script.onload = function () {
+      const vapi = window.vapiSDK?.run({
+        apiKey: publicKey,
+      });
+
+      document.getElementById("start").onclick = function () {
+        vapi.start(assistantId);
+      };
+
+      document.getElementById("stop").onclick = function () {
+        vapi.stop();
+      };
     };
+
+    document.head.appendChild(script);
   </script>
 </body>
 </html>
