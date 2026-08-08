@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,38 +7,23 @@
 
 <body>
   <h1>Wello Global AI Recruitment Assistant</h1>
-  <p>Click below to start the AI voice demo.</p>
+  <p>Talk to our AI recruitment assistant below.</p>
 
-  <button id="start">Start Voice Demo</button>
-  <button id="stop">End Call</button>
+  <script src="https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js"></script>
 
   <script>
-    const assistantId = "d85c6c22-89ad-4ab8-b770-babb76a5f3c8";
+    var vapiInstance = null;
 
-    // IMPORTANT:
-    // Paste your Vapi PUBLIC key here, not your private key.
-    const publicKey = "2a911681-7759-47da-be25-2ebe41c3c2ec___";
+    const assistant = "d85c6c22-89ad-4ab8-b770-babb76a5f3c8";
+    const apiKey = 2a911681-7759-47da-be25-2ebe41c3c2ec
 
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
-    script.defer = true;
-    script.async = true;
-
-    script.onload = function () {
-      const vapi = window.vapiSDK?.run({
-        apiKey: publicKey,
+    window.addEventListener("load", function () {
+      vapiInstance = window.vapiSDK.run({
+        apiKey: apiKey,
+        assistant: assistant,
+        config: {}
       });
-
-      document.getElementById("start").onclick = function () {
-        vapi.start(assistantId);
-      };
-
-      document.getElementById("stop").onclick = function () {
-        vapi.stop();
-      };
-    };
-
-    document.head.appendChild(script);
+    });
   </script>
 </body>
 </html>
